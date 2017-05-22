@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="null" threshold="null">
+	
+	<!-- DISABLE THE CONSOLE OUTPUT IN PRODUCTION ENVIRONTMENT! -->
+    <!-- Redirect the "console" no NullAppender to keep the server clean -->
+    <!-- If you wan t to log all in the JBoss server.log, re-enable this appender, since System.out is intercepted by jboss that log's on file -->	
+    <!-- <appender name="console" class="org.apache.log4j.varia.NullAppender" > -->
+    <appender name="nullAppender" class="org.apache.log4j.varia.NullAppender">
+    </appender>
+
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out" />
+        <layout class="org.apache.log4j.PatternLayout">
+<!--             <param name="ConversionPattern" value="%-5p %C{3} - %m%n" />-->
+            <param name="ConversionPattern" value="%d{dd/MM/yyyy HH:mm:ss} , [%-5p], [%t], [%c] , %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO" />
+            <param name="LevelMax" value="FATAL" />
+        </filter>
+    </appender>
+
+    <appender name="consoleDebug" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out" />
+        <layout class="org.apache.log4j.PatternLayout">
+<!--             <param name="ConversionPattern" value="%-5p %C{3} - %m%n" />-->
+            <param name="ConversionPattern" value="%d{dd/MM/yyyy HH:mm:ss} , [%-5p], [%t] , %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="DEBUG" />
+            <param name="LevelMax" value="FATAL" />
+        </filter>
+    </appender>
+
+    <appender name="consoleVanillaAppender" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out" />
+        <layout class="org.apache.log4j.PatternLayout">
+<!--             <param name="ConversionPattern" value="%-5p %C{3} - %m%n" />-->
+            <param name="ConversionPattern" value="%m%n" />
+        </layout>
+    </appender>
+
+    <appender name="consoleAll" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd/MM/yyyy HH:mm:ss} , [%-5p], [%t] , %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="file" class="org.apache.log4j.FileAppender">
+        <param name="File" value="./log/spark-trial.log" />
+        <param name="Append" value="false" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd/MM/yyyy HH:mm:ss} , [%-5p], [%t] , %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO" />
+            <param name="LevelMax" value="FATAL" />
+        </filter>
+    </appender>
+
+<!--     <appender name="rolling" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="./log/spark-trial-rol.log" />
+        <param name="MaxFileSize" value="100MB" />
+        <param name="MaxBackupIndex" value="10" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd/MM/yyyy HH:mm:ss} , [%-5p], [%t] , %m%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO" />
+            <param name="LevelMax" value="FATAL" />
+        </filter>
+    </appender> -->
+
+
+<!--     <logger name="com.sistemaits.optima.adi.put.process.schedule.ScheduleUpdate" additivity="false">
+        <level value="info" />
+        <appender-ref ref="console" />
+    </logger>
+
+    <logger name="openlr" additivity="false">
+        <level value="fatal" />
+        <appender-ref ref="console" />
+    </logger> -->
+
+
+<!--     <logger name="org" additivity="false">
+        <level value="info" />
+        <appender-ref ref="file" />
+    </logger> -->
+
+    <root>
+        <priority value="debug" />
+        <appender-ref ref="console" />
+        <appender-ref ref="file" />
+    </root>
+
+</log4j:configuration>
